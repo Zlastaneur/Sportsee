@@ -6,7 +6,8 @@ import sidebarGym from "./assets/sidebarGym.png"
 import sidebarZen from "./assets/sidebarZen.png"
 import sidebarSwim from "./assets/siderbarSwim.png"
 
-
+import BarChart from "./components/BarChart"
+import LineChart from "./components/LineChart"
 
 function App() {
 	return (
@@ -23,28 +24,36 @@ function App() {
 				</nav>
 			</header>
 			<div className="wrapper">
-        <div className="sidebar">
-          <div className="nav">
-            <img src={sidebarZen} alt="Zen" />
-            <img src={sidebarSwim} alt="Swim" />
-            <img src={sidebarBike} alt="Bike" />
-            <img src={sidebarGym} alt="Gym" />
-          </div>
-          <p>Copyright Sportsee 2020</p>
-        </div>
-        <div className="content">
-          <div>
-            <h1>Bonjour Prénom</h1>
-            <p>Félicitation ! Vous avez explosé vos objectifs hier</p>
-          </div>
-          <div className="first">
-
-          </div>
-          <div className="second">
-
-          </div>
-        </div>
-      </div>
+				<div className="sidebar">
+					<div className="nav">
+						<img src={sidebarZen} alt="Zen" />
+						<img src={sidebarSwim} alt="Swim" />
+						<img src={sidebarBike} alt="Bike" />
+						<img src={sidebarGym} alt="Gym" />
+					</div>
+					<p>Copyright Sportsee 2020</p>
+				</div>
+				<div className="content">
+					<div className="content_title">
+						<h1>Bonjour Prénom</h1>
+						<p>Félicitation ! Vous avez explosé vos objectifs hier</p>
+					</div>
+					<div className="mainCharts">
+						<BarChart />
+						<LineChart />
+					</div>
+					<div className="sideCharts">
+						<div>
+							<ul>
+								<li>Calories</li>
+								<li>Proteines</li>
+								<li>Glucides</li>
+								<li>Lipides</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</>
 	)
 }
