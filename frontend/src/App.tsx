@@ -7,7 +7,8 @@ import sidebarZen from "./assets/sidebarZen.png"
 import sidebarSwim from "./assets/siderbarSwim.png"
 
 import BarChart from "./components/BarChart"
-import LineChart from "./components/LineChart"
+import AreaChart from "./components/AreaChart"
+import RadarChart from "./components/RadarChart"
 
 function App() {
 	return (
@@ -40,7 +41,9 @@ function App() {
 					</div>
 					<div className="mainCharts">
 						<BarChart />
-						<LineChart />
+						<AreaChart />
+						<RadarChart />
+						<AreaChart />
 					</div>
 					<div className="sideCharts">
 						<div>

@@ -2,7 +2,7 @@ import { BarChart, Bar, XAxis, YAxis, Legend, Tooltip, CartesianGrid, Label, Tex
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from "../data"
 
 function BarChartComponent() {
-	const userActivity = USER_ACTIVITY.find((activity) => activity.userId === 12)
+	const data = USER_ACTIVITY.find((activity) => activity.userId === 12)
 
 	const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any[] }) => {
 		if (active && payload && payload.length) {
@@ -17,7 +17,7 @@ function BarChartComponent() {
 
 	return (
 		<ResponsiveContainer width="100%" height={350} className="barChart">
-			<BarChart data={userActivity.sessions} barGap="10%">
+			<BarChart data={data.sessions} barGap="10%">
 				<text x="0" y="20" className="title">
 					Activité quotidienne
 				</text>
