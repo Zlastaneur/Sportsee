@@ -9,8 +9,15 @@ import sidebarSwim from "./assets/siderbarSwim.png"
 import BarChart from "./components/BarChart"
 import AreaChart from "./components/AreaChart"
 import RadarChart from "./components/RadarChart"
+import RadialBarChart from "./components/RadialBarChart"
+import NutritionalList from "./components/NutritionalList"
+
+import { USER_MAIN_DATA } from "./data"
 
 function App() {
+	const user = USER_MAIN_DATA.find((user) => user.id === 18)
+	const userName = user.userInfos.firstName
+
 	return (
 		<>
 			<header>
@@ -36,24 +43,19 @@ function App() {
 				</div>
 				<div className="content">
 					<div className="content_title">
-						<h1>Bonjour Prénom</h1>
-						<p>Félicitation ! Vous avez explosé vos objectifs hier</p>
+						<h1>
+							Bonjour <span>{userName}</span>
+						</h1>
+						<p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 					</div>
 					<div className="mainCharts">
 						<BarChart />
 						<AreaChart />
 						<RadarChart />
-						<AreaChart />
+						<RadialBarChart />
 					</div>
 					<div className="sideCharts">
-						<div>
-							<ul>
-								<li>Calories</li>
-								<li>Proteines</li>
-								<li>Glucides</li>
-								<li>Lipides</li>
-							</ul>
-						</div>
+						<NutritionalList />
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,4 @@
-import { RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Legend, ResponsiveContainer } from "recharts"
+import { RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer } from "recharts"
 import { USER_PERFORMANCE } from "../data"
 
 function RadarChartComponent() {
@@ -6,15 +6,15 @@ function RadarChartComponent() {
 
 	const data = userPerformance.data.map((item) => ({
 		...item,
-		kind: userPerformance.kind[item.kind],
+		kind: userPerformance.kind[item.kind].charAt(0).toUpperCase() + userPerformance.kind[item.kind].slice(1),
 	}))
 
 	return (
 		<ResponsiveContainer width="30%" height={320} className="radarChart">
-			<RadarChart cx="50%" cy="50%" outerRadius="60%" data={data}>
-				<PolarGrid />
-				<PolarAngleAxis dataKey="kind" />
-				<Radar name="Performance" dataKey="value" stroke="#8884d8" fill="#e60000" fillOpacity={0.6} />
+			<RadarChart cx="50%" cy="50%" outerRadius="55%" data={data}>
+				<PolarGrid radialLines={false} />
+				<PolarAngleAxis dataKey="kind" tick={{ fill: "white" }} />
+				<Radar name="Performance" dataKey="value" fill="#e60000" fillOpacity={0.7} />
 			</RadarChart>
 		</ResponsiveContainer>
 	)
