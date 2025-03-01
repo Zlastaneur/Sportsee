@@ -2,7 +2,11 @@ import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from "rec
 import { USER_AVERAGE_SESSIONS } from "../data"
 
 function AreaChartComponent() {
-	const data = USER_AVERAGE_SESSIONS.find((session) => session.userId === 12)
+	let data
+
+	if (import.meta.env.VITE_ENVIRONMENT === "dev") {
+		data = USER_AVERAGE_SESSIONS.find((session) => session.userId === 12)
+	}
 
 	const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any[] }) => {
 		if (active && payload && payload.length) {

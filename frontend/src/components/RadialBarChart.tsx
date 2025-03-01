@@ -1,11 +1,17 @@
 import { RadialBarChart, RadialBar, ResponsiveContainer, PolarAngleAxis } from "recharts"
-import { USER_MAIN_DATA } from "../data"
+import { getUserMainData } from "../ApiService.js"
+import { useEffect, useState } from "react"
 
 function RadialBarChartComponent() {
-	const user = USER_MAIN_DATA.find((data) => data.id === 12)
-	const data = [{ name: "Score", uv: user.todayScore * 100 || user.score * 100 }]
+	const [data, setData] = useState([])
 
-	return (
+	useEffect(() => {
+		getUserMainData().then((formattedData) => {
+			setData(formattedData)
+		})
+	}, [])
+
+	return data[0] ? (
 		<ResponsiveContainer width="30%" height={320} className="radialBarChart">
 			<RadialBarChart width={730} height={250} innerRadius="60%" outerRadius="70%" data={data} startAngle={90} endAngle={450} barSize={14}>
 				<text x="40" y="50" className="title">
@@ -24,6 +30,8 @@ function RadialBarChartComponent() {
 				</text>
 			</RadialBarChart>
 		</ResponsiveContainer>
+	) : (
+		""
 	)
 }
 

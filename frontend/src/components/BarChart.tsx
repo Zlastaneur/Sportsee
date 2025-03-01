@@ -1,8 +1,11 @@
-import { BarChart, Bar, XAxis, YAxis, Legend, Tooltip, CartesianGrid, Label, Text, ResponsiveContainer } from "recharts"
-import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from "../data"
+import { BarChart, Bar, XAxis, YAxis, Legend, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts"
+import { getUserActivity } from "../ApiService.js"
+import { useEffect, useState } from "react"
 
 function BarChartComponent() {
-	const data = USER_ACTIVITY.find((activity) => activity.userId === 12)
+	interface Idata {
+		sessions: any
+	}
 
 	const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any[] }) => {
 		if (active && payload && payload.length) {
@@ -15,7 +18,15 @@ function BarChartComponent() {
 		}
 	}
 
-	return (
+	const [data, setData] = useState<Idata>()
+
+	useEffect(() => {
+		getUserActivity().then((formattedData) => {
+			setData(formattedData)
+		})
+	}, [])
+
+	return data ? (
 		<ResponsiveContainer width="100%" height={350} className="barChart">
 			<BarChart data={data.sessions} barGap="10%">
 				<text x="0" y="20" className="title">
@@ -37,6 +48,8 @@ function BarChartComponent() {
 				<Bar dataKey="calories" fill="#E60000" barSize={10} radius={[5, 5, 0, 0]} name="Calories brûlées (kCal)" />
 			</BarChart>
 		</ResponsiveContainer>
+	) : (
+		""
 	)
 }
 
