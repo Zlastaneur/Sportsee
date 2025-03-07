@@ -15,9 +15,8 @@ import NutritionalList from "./components/NutritionalList"
 import { USER_MAIN_DATA } from "./data"
 
 function App() {
-	const user = USER_MAIN_DATA.find((user) => user.id === 18)
+	const user = USER_MAIN_DATA.find((user) => user.id == import.meta.env.VITE_USERID)
 	const userName = user.userInfos.firstName
-	console.log(import.meta.env.VITE_ENVIRONMENT)
 
 	return (
 		<>

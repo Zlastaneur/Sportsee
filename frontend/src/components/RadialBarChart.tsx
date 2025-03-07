@@ -11,7 +11,7 @@ function RadialBarChartComponent() {
 		})
 	}, [])
 
-	return data[0] ? (
+	return data && data[0] ? (
 		<ResponsiveContainer width="30%" height={320} className="radialBarChart">
 			<RadialBarChart width={730} height={250} innerRadius="60%" outerRadius="70%" data={data} startAngle={90} endAngle={450} barSize={14}>
 				<text x="40" y="50" className="title">

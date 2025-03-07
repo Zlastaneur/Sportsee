@@ -1,11 +1,10 @@
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts"
-import { USER_AVERAGE_SESSIONS } from "../data"
+import { getUserAverageSession } from "../ApiService.js"
+import { useEffect, useState } from "react"
 
 function AreaChartComponent() {
-	let data
-
-	if (import.meta.env.VITE_ENVIRONMENT === "dev") {
-		data = USER_AVERAGE_SESSIONS.find((session) => session.userId === 12)
+	interface Idata {
+		sessions: any
 	}
 
 	const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any[] }) => {
@@ -18,7 +17,15 @@ function AreaChartComponent() {
 		}
 	}
 
-	return (
+	const [data, setData] = useState<Idata>()
+
+	useEffect(() => {
+		getUserAverageSession().then((formattedData) => {
+			setData(formattedData)
+		})
+	}, [])
+
+	return data ? (
 		<ResponsiveContainer width="30%" height={320} className="areaChart">
 			<AreaChart data={data.sessions} margin={{ top: 100, left: -1, right: -1, bottom: 0 }}>
 				<text x="30" y="50" className="title" fill="#F1F1F1">
@@ -36,6 +43,8 @@ function AreaChartComponent() {
 				</text>
 			</AreaChart>
 		</ResponsiveContainer>
+	) : (
+		""
 	)
 }
 

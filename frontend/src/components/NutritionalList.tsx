@@ -1,4 +1,5 @@
-import { USER_MAIN_DATA } from "../data"
+import { getUserKeyData } from "../ApiService.js"
+import { useEffect, useState } from "react"
 
 import { TbFlameFilled } from "react-icons/tb"
 import { PiHamburgerFill } from "react-icons/pi"
@@ -6,38 +7,50 @@ import { FaDrumstickBite } from "react-icons/fa"
 import { FaAppleAlt } from "react-icons/fa"
 
 function NutritionalListComponent() {
-	const user = USER_MAIN_DATA.find((data) => data.id === 12)
-	const data: { [key: string]: number } = user.keyData
+	const [data, setData] = useState<{ [key: string]: number } | null>(null)
 
-	const icons = {
-		calorieCount: <TbFlameFilled />,
-		proteinCount: <FaDrumstickBite />,
-		carbohydrateCount: <FaAppleAlt />,
-		lipidCount: <PiHamburgerFill />,
+	useEffect(() => {
+		getUserKeyData().then((formattedData) => {
+			setData(formattedData)
+		})
+	}, [])
+
+	const nutritionalInfo = {
+		calorieCount: {
+			icon: <TbFlameFilled />,
+			name: "Calories",
+		},
+		proteinCount: {
+			icon: <FaDrumstickBite />,
+			name: "Protéines",
+		},
+		carbohydrateCount: {
+			icon: <FaAppleAlt />,
+			name: "Glucides",
+		},
+		lipidCount: {
+			icon: <PiHamburgerFill />,
+			name: "Lipides",
+		},
 	}
 
-	const names = {
-		calorieCount: "Calories",
-		proteinCount: "Protéines",
-		carbohydrateCount: "Glucides",
-		lipidCount: "Lipides",
-	}
-
-	return (
+	return data ? (
 		<div className="nutritionalList">
 			{Object.entries(data).map(([key, value]) => (
 				<div className={`${key} wrapper`} key={key}>
-					<span>{icons[key]}</span>
+					{nutritionalInfo[key] && <span>{nutritionalInfo[key].icon}</span>}
 					<div className="detail">
 						<p className="value">
 							{value}
 							{key === "calorieCount" ? "kCal" : "g"}
 						</p>
-						<p className="type">{names[key]}</p>
+						{nutritionalInfo[key] && <p className="type">{nutritionalInfo[key].name}</p>}
 					</div>
 				</div>
 			))}
 		</div>
+	) : (
+		""
 	)
 }
 

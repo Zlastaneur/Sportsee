@@ -175,6 +175,7 @@ header {
 	.radarChart {
 		border-radius: 5px;
 		background-color: #282d30;
+		padding: 0.3rem;
 	}
 
 	.radialBarChart {
@@ -286,6 +287,43 @@ header {
 			span {
 				color: #fd5181;
 				background-color: #fd51811a;
+			}
+		}
+	}
+}
+
+@media only screen and (max-device-width: 1440px) {
+	.content {
+		width: 100%;
+		padding: 2rem;
+
+		.content_title {
+			margin-bottom: 3rem;
+		}
+	}
+
+	.mainCharts {
+		width: 100%;
+		order: 2;
+	}
+	.sideCharts {
+		width: 100%;
+		order: 1;
+		margin-bottom: 2rem;
+
+		.nutritionalList {
+			max-width: 100%;
+			flex-flow: row nowrap;
+			justify-content: space-between;
+			align-items: center;
+
+			.wrapper {
+				padding: 0rem;
+				justify-content: center;
+
+				.detail {
+					padding: 0 1rem;
+				}
 			}
 		}
 	}
