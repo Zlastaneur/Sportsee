@@ -3,6 +3,26 @@ import FormatterData from "./Formatter.js"
 
 const formatterData = new FormatterData()
 
+export async function getUser() {
+  if (import.meta.env.VITE_ENVIRONMENT === "dev") {
+    const user = USER_MAIN_DATA.find((data) => data.id == import.meta.env.VITE_USERID)
+    return user
+  } else {
+    const url = import.meta.env.VITE_BACKENDURL + `/user/${import.meta.env.VITE_USERID}`
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`)
+      }
+
+      const json = await response.json()
+      return json.data
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+}
+
 export async function getUserActivity() {
   if (import.meta.env.VITE_ENVIRONMENT === "dev") {
     const data = USER_ACTIVITY.find((activity) => activity.userId == import.meta.env.VITE_USERID)

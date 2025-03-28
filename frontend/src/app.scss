@@ -292,6 +292,18 @@ header {
 	}
 }
 
+.apiErrorMessage {
+	width: 100%;
+	height: 95vh;
+	p {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 1.5em;
+	}
+}
+
 @media only screen and (max-device-width: 1440px) {
 	.content {
 		width: 100%;

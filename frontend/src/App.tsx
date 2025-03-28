@@ -12,11 +12,23 @@ import RadarChart from "./components/RadarChart"
 import RadialBarChart from "./components/RadialBarChart"
 import NutritionalList from "./components/NutritionalList"
 
-import { USER_MAIN_DATA } from "./data"
+import { useEffect, useState } from "react"
+import { getUser } from "./ApiService"
 
 function App() {
-	const user = USER_MAIN_DATA.find((user) => user.id == import.meta.env.VITE_USERID)
-	const userName = user.userInfos.firstName
+	const [user, setUser] = useState(null)
+	const [userName, setUserName] = useState("")
+
+	useEffect(() => {
+		async function fetchUser() {
+			const fetchedUser = await getUser()
+			if (fetchedUser) {
+				setUser(fetchedUser)
+				setUserName(fetchedUser.userInfos.firstName)
+			}
+		}
+		fetchUser()
+	}, [])
 
 	return (
 		<>
@@ -41,23 +53,29 @@ function App() {
 					</div>
 					<p>Copyright Sportsee 2020</p>
 				</div>
-				<div className="content">
-					<div className="content_title">
-						<h1>
-							Bonjour <span>{userName}</span>
-						</h1>
-						<p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+				{user ? (
+					<div className="content">
+						<div className="content_title">
+							<h1>
+								Bonjour <span>{userName}</span>
+							</h1>
+							<p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+						</div>
+						<div className="mainCharts">
+							<BarChart />
+							<AreaChart />
+							<RadarChart />
+							<RadialBarChart />
+						</div>
+						<div className="sideCharts">
+							<NutritionalList />
+						</div>
 					</div>
-					<div className="mainCharts">
-						<BarChart />
-						<AreaChart />
-						<RadarChart />
-						<RadialBarChart />
+				) : (
+					<div className="apiErrorMessage">
+						<p>Vos données sont inaccessibles pour le moment. Veuillez réessayer plus tard.</p>
 					</div>
-					<div className="sideCharts">
-						<NutritionalList />
-					</div>
-				</div>
+				)}
 			</div>
 		</>
 	)
