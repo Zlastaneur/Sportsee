@@ -1,50 +1,56 @@
-# React + TypeScript + Vite
+## Installation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. **Clone the repository:**
 
-Currently, two official plugins are available:
+    ```bash
+    git clone <repo-url>
+    cd Frontend
+    ```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. **Install dependencies:**
 
-## Expanding the ESLint configuration
+    ```bash
+    npm install
+    ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3. **Configure the environment:**
 
-- Configure the top-level `parserOptions` property like this:
+    - Rename `.env.example` to `.env` if needed.
+    - Edit the variables as required:
+        ```
+        VITE_ENVIRONMENT=dev # or prod
+        VITE_USERID=12 # or 18
+        VITE_BACKENDURL="http://localhost:3000"
+        ```
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+4. **Start the project:**
+    ```bash
+    npm run dev
+    ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Folder structure
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+-   `src/components/`: React components (charts, lists, etc.)
+-   `src/data.js`: Mock data for development mode.
+-   `src/ApiService.js`: Service for API calls (mock or real).
+-   `src/Formatter.js`: Utility for formatting data.
+-   `src/app.scss`: Global styles.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Usage
+
+-   The frontend connects to the backend API (Node.js/Express).
+-   If the API is not accessible, an error message is displayed to the user.
+-   The mode (dev or prod) is controlled by the `VITE_ENVIRONMENT` environment variable.
+
+## Useful scripts
+
+-   `npm run dev`: Start the development server.
+-   `npm run build`: Build the production version.
+-   `npm run preview`: Preview the production build.
+
+## Notes
+
+-   To test with mock data, use `VITE_ENVIRONMENT=dev`.
+-   To use the real API, start the backend and set `VITE_ENVIRONMENT=prod`.
+
+---
